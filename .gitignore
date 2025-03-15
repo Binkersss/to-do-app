@@ -145,3 +145,5 @@ dist
 /dataSources.local.xml
 
 .idea/
+
+*.http
