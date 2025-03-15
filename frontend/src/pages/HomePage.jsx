@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
-import TextBar from "../components/TextBar.jsx";
-import TaskItem from "../components/TaskItem.jsx";
+import { useEffect, useState } from "react";
+import TextBar from "../components/TextBar";
+import TaskCollection from "../components/TaskCollection";
+import Calendar from "../components/Calendar";
+import "../App.css";
 
 const HomePage = () => {
     const [tasks, setTasks] = useState([]);
 
     // Fetch tasks when the component mounts
     useEffect(() => {
-        fetch('/tasks')
+        fetch("/tasks")
             .then((response) => response.json())
             .then((data) => setTasks(data))
-            .catch((error) => console.error('Error fetching tasks:', error));
+            .catch((error) => console.error("Error fetching tasks:", error));
     }, []); // Empty dependency array ensures this runs only once when the component mounts
 
     const handleTaskSubmit = (task) => {
@@ -21,11 +23,8 @@ const HomePage = () => {
         <div className="home-container">
             <h1 className="title">Task Manager</h1>
             <TextBar onTaskSubmit={handleTaskSubmit} />
-            <ul className="task-list">
-                {tasks.map((task) => (
-                    <TaskItem key={task._id} task={task} />
-                ))}
-            </ul>
+            <TaskCollection tasks={tasks} />
+            <Calendar />
         </div>
     );
 };
