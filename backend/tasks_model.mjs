@@ -32,7 +32,7 @@ async function getTasks(query) {
 async function getUndatedTasks(query) {
     try {
         const undatedTasks = await Task.find(
-            {start_date: { $exists: false },
+            {end_date: null,
                 ...query
             });
         return undatedTasks;
