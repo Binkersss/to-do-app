@@ -1,22 +1,21 @@
 import React from "react";
 
-const TaskItem = ({ task }) => {
+const TaskItem = ({ task, onToggle }) => {
     return (
-        <>
-            <strong>{task.name}</strong>
-            <br />
-            {task.start_date && (
-                <span className="task-date">Start Date: {new Date(task.start_date).toLocaleDateString()}</span>
-            )}
-            <br />
-            {task.end_date && (
-                <span className="task-date">End Date: {new Date(task.end_date).toLocaleDateString()}</span>
-            )}
-            <br />
-            {task.tags && task.tags.length > 0 && (
-                <span className="task-tags">Tags: {task.tags.join(", ")}</span>
-            )}
-        </>
+        <div className="task-item">
+            <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => onToggle(task._id)}
+                className="task-checkbox"
+            />
+            <div className="task-content">
+                <strong className={task.completed ? "task-completed" : ""}>{task.name}</strong>
+                {task.tags && task.tags.length > 0 && (
+                    <span className="task-tags">{task.tags.join(", ")}</span>
+                )}
+            </div>
+        </div>
     );
 };
 

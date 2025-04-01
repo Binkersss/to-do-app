@@ -1,13 +1,11 @@
 import React from "react";
 import TaskItem from "./TaskItem";
 
-const TaskCollection = ({ tasks }) => {
+const TaskCollection = ({ tasks, onToggle }) => {
     return (
-        <div className="task-grid">
+        <div className="task-list">
             {tasks.map((task) => (
-                <div className="task-item" key={task._id}>
-                    <TaskItem task={task} />
-                </div>
+                <TaskItem key={task._id} task={task} onToggle={onToggle} />
             ))}
         </div>
     );
